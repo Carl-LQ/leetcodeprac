@@ -69,6 +69,8 @@ public:
 		node->next = NULL;
 		this->tail->next = node;
 		this->tail = node;
+
+		return true;
 	}
 
 	// Remove the least used one

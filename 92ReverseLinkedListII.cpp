@@ -61,3 +61,47 @@ public:
        return dummy -> next;
    }
 };
+
+
+// 参考了左神书上的方法，感觉思路更加清晰
+class Solution {
+public:
+    ListNode* reverseBetween(ListNode* head, int m, int n) {
+        ListNode* fPre = NULL; // the pre of from
+        ListNode* tPos = NULL; // the post of end
+        ListNode* cur = head;
+        int len = 0;
+        while (cur) {
+            ++len;
+            if (len == m - 1) {
+                fPre = cur;
+            }
+            if (len == n + 1) {
+                tPos = cur;
+            }
+            cur = cur->next;
+        }
+        if (m >= n || m < 1 || n > len) {
+            return head;
+        }
+        
+        cur = fPre ? fPre->next : head;     // fPre == NULL means m == 1, which means we need to reverse the whole list
+        
+        ListNode* next = NULL;
+        ListNode* pre = tPos;
+        while (cur != tPos) {
+            next = cur->next;
+            cur->next = pre;
+            pre = cur;
+            cur = next;
+        }
+        
+        if (fPre) {
+            fPre->next = pre;
+            return head;
+        } else {
+            return pre;
+        }
+        
+    }
+};

@@ -104,3 +104,63 @@ public:
     }
     
 };
+
+
+// 最后一种，自底向上的方法，因为我们已经想出了分治的方法，我们可以逆过程自底向上推，时间复杂度一样是O(NlogK)
+class Solution {
+public:
+    static bool cmp(ListNode* l1, ListNode* l2) {
+        return l1->val > l2->val;
+    }
+    
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        if (lists.empty())
+            return NULL;
+        
+        while (lists.size() > 1) {
+            vector<ListNode*> new_lists;
+            for (int i = 0; i+1 < lists.size(); i += 2) {
+                new_lists.push_back(mergeTwoSortedList(lists[i],lists[i+1]));
+            }
+            if (lists.size() & 1) {
+                new_lists.push_back(lists[lists.size()-1]);
+            }
+            lists.swap(new_lists);
+        }
+        
+        return lists[0];
+    }
+    
+    ListNode* mergeTwoSortedList(ListNode* l, ListNode* r) {
+        if (!l)
+            return r;
+        
+        if (!r)
+            return l;
+        
+        ListNode* head = NULL;
+        ListNode* tail = NULL;
+        ListNode* cur = NULL;
+        while (l && r) {
+            if (l->val < r->val) {
+                cur = l;
+                l = l->next;
+            } else {
+                cur = r;
+                r = r->next;
+            }
+            
+            if (tail == NULL) {
+                head = cur;
+            } else {
+                tail->next = cur;
+            }
+            
+            tail = cur;
+        }
+        
+        tail->next = l ? l : r;
+        return head;
+    }
+    
+};

@@ -30,7 +30,7 @@ int f(vector<int>& nums, int pos) {
     return max(nums[pos]+f(nums, pos+2), f(nums, pos+1));
 }
 
-// 参考了高赞回复以后，发现还可以优化空间，只需要用O(1)的空间
+// 参考了高赞回复以后，还可以优化空间，只需要用O(1)的空间
 int rob(vector<int>& nums) {
     if(!nums.size())
         return 0;

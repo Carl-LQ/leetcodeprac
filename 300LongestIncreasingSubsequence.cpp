@@ -70,7 +70,6 @@ public:
         vector<int> dp(nums.size(), 1); // the LIS that end with nums[i]
         vector<int> ends(nums.size());
         int right = 0;
-        int res = 1;
         ends[0] = nums[0];
         for (int i = 1; i < nums.size(); ++i) {
             int l = 0;
@@ -86,8 +85,7 @@ public:
             right = max(right, l);
             ends[l] = nums[i];
             dp[i] = l+1;
-            res = max(res, dp[i]);
         }
-        return res;
+        return right+1;
     }
 };

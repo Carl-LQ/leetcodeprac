@@ -15,11 +15,8 @@ public:
                 ++t_index;
             }
         }
-        if (s_index == s.length()) {
-            return true;
-        } else {
-            return false;
-        }
+        
+        return s_index == s.length();
     }
 };
 

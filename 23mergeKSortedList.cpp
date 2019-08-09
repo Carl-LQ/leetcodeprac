@@ -26,11 +26,13 @@ public:
         while (!pq.empty()) {
             cur = pq.top();
             pq.pop();
+
             if (pre == NULL) {
                 head = cur;
             } else {
                 pre->next = cur;
             }
+            
             pre = cur;
             if (cur->next) {
                 pq.push(cur->next);

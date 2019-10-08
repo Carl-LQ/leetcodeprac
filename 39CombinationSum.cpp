@@ -1,3 +1,5 @@
+// 比较典型的回溯的问题，一开始还想着能不能用dp来做，因为看起来和找钱的题型有点像，虽然也是无后效性的问题，但实际上如果用dp的话我们可以快速求出有多少种方法，但是每一种具体的方法
+
 class Solution {
 public:
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
